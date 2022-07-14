@@ -1,7 +1,54 @@
 .custom-jumbotron {
     background-image: linear-gradient(to right, rgb(84, 130, 239), rgb(25, 12, 74));
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: white;
     padding: 5px;
     text-align: center;
+    margin-bottom: 10px;
+}
+
+.custom-card1 {
+    border: none;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+}
+
+.custom-btn {
+    background-color: rgb(106, 163, 255);
+    color: white;
+    margin: 10px 0px;
+}
+
+#searchHistory {
+    border-top: 1px solid black;
+}
+
+.searchItem {
+    list-style-type: none;
+    border-radius: 4px;
+    background-color: rgb(178, 175, 175);
+    text-align: center;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+.custom-today {
+   border: 1px solid black;
+   line-height: 1;
+   padding-top: 10px;
+   margin-top: 5px;
+}
+
+.custom-card2 {
+    background-color: rgb(56, 74, 106);
+    color: white;
+    border-radius: 0px;
+    margin: 0px 10px;
+}
+
+.custom-header {
+    font-family: 'Roboto', sans-serif;
+    padding: 5px;
 }
