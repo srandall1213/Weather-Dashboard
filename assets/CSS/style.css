@@ -1,0 +1,7 @@
+.custom-jumbotron {
+    background-image: linear-gradient(to right, rgb(84, 130, 239), rgb(25, 12, 74));
+    font-family: 'Work Sans', sans-serif;
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
