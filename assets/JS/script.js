@@ -3,10 +3,9 @@ var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 
 function todayBox() {
-    var queryURL = 'api.openweathermap.org/data/2.5/weather?q=' + cityInput + '&appid=' + apiKey;
+    var queryURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput.value + '&appid=' + apiKey;
     fetch(queryURL)
       .then(function (response) {
-        console.log(response)
         return response.json();
       })
       .then(function (data) {
