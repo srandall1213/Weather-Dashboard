@@ -7,10 +7,6 @@
     margin-bottom: 10px;
 }
 
-.custom-card1 {
-    border: none;
-}
-
 h3 {
     font-family: 'Roboto', sans-serif;
 }
@@ -41,7 +37,7 @@ h3 {
    margin-top: 5px;
 }
 
-.custom-card2 {
+.custom-card {
     background-color: rgb(56, 74, 106);
     color: white;
     border-radius: 0px;

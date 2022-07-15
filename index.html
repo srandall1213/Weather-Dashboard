@@ -25,28 +25,22 @@
         <!-- all content in a row -->
         <div class="row">
 
-            <!-- column 1 -->
-            <div class="col-12 col-md-4 col-xl-3 card custom-card1">
+            <!-- Column 1: Search for a City-->
+            <div class="col-12 col-md-4 col-xl-3 card border-0">
                 <h3>Search for a City:</h3>
-                <input type="text" class="form-control" placeholder="San Diego" aria-label="City Search Box">
-                <a href="#" class="btn custom-btn w-100">Search</a>
+                <input type="text" class="form-control" placeholder="San Diego" aria-label="City Search Box" id="cityInput">
+                <a class="btn custom-btn w-100" id="searchBtn">Search</a>
                 <div id="searchHistory">
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
-                    <div class="searchItem">Austin</div>
+                    <div class="searchItem">demo</div>
+                    
                 </div>
             </div>
         
-            <!-- column 2 -->
+            <!-- Column 2 -->
             <div class="col-12 col-md-8 col-xl-9">
-
+                <!-- Today Box -->
                 <div class="col custom-today">
-                    <h3><span id="city"></span><span id="todayDate"></span><span id="todayEmoji"></span>Atlanta (7/16/2022) ☁️</h3>
+                    <h3><span id="city"></span> <span id="todayDate"></span> <span id="todayEmoji">☁️</span></h3>
                     <p>Temp:<span id="tempToday"></span> F</p>
                     <p>Wind:<span id="windToday"></span> MPH</p>
                     <p>Humidity:<span id="humidityToday"></span> %</p>
@@ -54,38 +48,38 @@
                 </div>
 
                 <h3 class="container-fluid p-1 mt-2">5-Day Forcast:</h3>
-                <!-- cards in a row -->
+                <!-- Forcast cards in a row -->
                 <div class="row justify-content-center w-auto">
-                <div class="col-2 custom-card2">
-                    <div class="custom-header"><span id="date1">7/17/22</span></div>
+                <div class="col-2 custom-card">
+                    <div class="custom-header"><span id="date1">1/1/11</span></div>
                     <p><span id="emoji1" class="align-middle">⛅️</span></p>
                     <p>Temp:<span id="temp1"></span> F</p>
                     <p>Wind:<span id="wind1"></span> MPH</p>
                     <p>Humidity:<span id="humidity1"></span> %</p>
                 </div>
-                <div class="col-2 custom-card2">
-                    <div class="custom-header"><span id="date2">7/18/22</span></div>
+                <div class="col-2 custom-card">
+                    <div class="custom-header"><span id="date2">1/1/11</span></div>
                     <p><span id="emoji2" class="align-middle">⛅️</span></p>
                     <p>Temp:<span id="temp2"></span> F</p>
                     <p>Wind:<span id="wind2"></span> MPH</p>
                     <p>Humidity:<span id="humidity2"></span> %</p>
                 </div>
-                <div class="col-2 custom-card2">
-                    <div class="custom-header"><span id="date3">7/19/22</span></div>
+                <div class="col-2 custom-card">
+                    <div class="custom-header"><span id="date3">1/1/11</span></div>
                     <p><span id="emoji3" class="align-middle">⛅️</span></p>
                     <p>Temp:<span id="temp3"></span> F</p>
                     <p>Wind:<span id="wind3"></span> MPH</p>
                     <p>Humidity:<span id="humidity3"></span> %</p>
                 </div>
-                <div class="col-2 custom-card2">
-                    <div class="custom-header"><span id="date4">7/20/22</span></div>
+                <div class="col-2 custom-card">
+                    <div class="custom-header"><span id="date4">1/1/11</span></div>
                     <p><span id="emoji4" class="align-middle">⛅️</span></p>
                     <p>Temp:<span id="temp4"></span> F</p>
                     <p>Wind:<span id="wind4"></span> MPH</p>
                     <p>Humidity:<span id="humidity4"></span> %</p>
                 </div>
-                <div class="col-2 custom-card2">
-                    <div class="custom-header"><span id="date5">7/21/22</span></div>
+                <div class="col-2 custom-card">
+                    <div class="custom-header"><span id="date5">1/1/11</span></div>
                     <p><span id="emoji5" class="align-middle">⛅️</span></p>
                     <p>Temp:<span id="temp5"></span> F</p>
                     <p>Wind:<span id="wind5"></span> MPH</p>
