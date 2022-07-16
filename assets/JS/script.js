@@ -2,11 +2,11 @@ var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 
-searchBtn.addEventListener('click', todayBox);
+searchBtn.addEventListener('click', today);
 searchBtn.addEventListener('click', fiveDayForcast);
 
-function todayBox() {
-    var todayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput.value + '&units=imperial' + '&appid=' + apiKey;
+function today() {
+    var todayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput.value + '&appid=' + apiKey + '&units=imperial';
     fetch(todayURL)
       .then(function (response) {
         return response.json();
@@ -54,47 +54,55 @@ function todayBox() {
 }      
 
 function fiveDayForcast() {
-
-  var fiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput.value + '&units=imperial' + '&appid=' + apiKey;
-    fetch(fiveDayUrl)
-      .then(function (response5) {
-        return response5.json();
+  //NEED TO CHECK IF COUNT = 5 PARAMETER IS RIGHT... 5 DAYS OR 5 TIMESTAMPS IN ONE DAY?
+  var fiveDayURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput.value + '&appid=' + apiKey + '&units=imperial&cnt=5';
+    fetch(fiveDayURL)
+      .then(function (response) {
+        return response.json();
       })
-      .then(function (data5) {
-        console.log(data5);
-
-      //add for loop & find a call that only gives one time of day for the 5 day forcast
+      .then(function (data) {
+        console.log(data);
 
         //5-DAY FORCAST TITLE
         var fiveDayTitleEl = document.querySelector("#fiveDayTitle");
         fiveDayTitleEl.textContent = "5-Day Forcast:";
 
-        //CARD-1
+        //FOR LOOP FOR ALL 5 CARDS - NOT RIGHT VARIABLES
+        for (var i = 0; i < data.list.length; i++) {
+
+        //CARDS
         //container + background
-        var card1ContainerEl = document.querySelector("#card1Container");
-        card1ContainerEl.classList.add("custom-card");
+        var cardRowEl = document.querySelector("#cardRow");
+        var cardEl = document.createElement('div');
+        cardEl.classList.add("custom-card");
+        cardEl.classList.add("col-2");
+        cardRowEl.append(cardEl);
         //date
-        var date1El = document.createElement('div');
-        date1El.textContent = moment.unix(data5.list[0].dt).format("MM/DD/YYYY");
-        date1El.classList.add("custom-header");
-        card1ContainerEl.append(date1El);
+        var dateEl = document.createElement('div');
+        dateEl.textContent = moment.unix(data.list[0].dt).format("MM/DD/YYYY");
+        dateEl.classList.add("custom-header");
+        cardEl.append(dateEl);
         //emoji
-        var imgEl1 = document.createElement('img');
-        var iconCode1 = data5.list[0].weather[0].icon;
-        var iconUrl1 = "http://openweathermap.org/img/w/" + iconCode1 + ".png";
-        imgEl1.setAttribute('src', iconUrl1);
-        card1ContainerEl.append(imgEl1);
+        var imgEl = document.createElement('img');
+        var iconCode = data.list[0].weather[0].icon;
+        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        imgEl.setAttribute('src', iconUrl);
+        cardEl.append(imgEl);
         //temp
-        // var temp1 = document.createElement('p');
-        // temp1.textContent = "Temp: " + data5.main.temp + "\u00B0" + " F";
-        // card1ContainerEl.append(temp1);
+        var temp = document.createElement('p');
+        temp.textContent = "Temp: " + data.list[0].main.temp + "\u00B0" + " F";
+        cardEl.append(temp);
         //wind
-        // var wind1 = document.createElement('p');
-        // wind1.textContent = "Wind: " + data5.wind.speed + " MPH";
-        // card1ContainerEl.append(wind1);
+        var wind = document.createElement('p');
+        wind.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
+        cardEl.append(wind);
         //humidity
-        // var humidity1 = document.createElement('p');
-        // humidity1.textContent = "Humidity: " + data5.main.humidity + "%";
-        // card1ContainerEl.append(humidity1);
+        var humidity = document.createElement('p');
+        humidity.textContent = "Humidity: " + data.list[0].main.humidity + "%";
+        cardEl.append(humidity);
+        }
       });
 }
+        
+        
+        
