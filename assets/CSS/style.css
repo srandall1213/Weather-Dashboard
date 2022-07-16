@@ -91,5 +91,6 @@ h3 {
 
 .custom-header {
     font-family: 'Roboto', sans-serif;
-    padding: 5px;
+    padding-top: 9px;
+    word-wrap: break-word;
 }
