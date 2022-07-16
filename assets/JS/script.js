@@ -54,7 +54,7 @@ function today() {
 }      
 
 function fiveDayForcast() {
-  //NEED TO CHECK IF COUNT = 5 PARAMETER IS RIGHT... 5 DAYS OR 5 TIMESTAMPS IN ONE DAY?
+  //NEED TO PARAMETERS RIGHT
   var fiveDayURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput.value + '&appid=' + apiKey + '&units=imperial&cnt=5';
     fetch(fiveDayURL)
       .then(function (response) {
@@ -67,7 +67,7 @@ function fiveDayForcast() {
         var fiveDayTitleEl = document.querySelector("#fiveDayTitle");
         fiveDayTitleEl.textContent = "5-Day Forcast:";
 
-        //FOR LOOP FOR ALL 5 CARDS - NOT RIGHT VARIABLES
+        //FOR LOOP FOR ALL 5 CARDS
         for (var i = 0; i < data.list.length; i++) {
 
         //CARDS
@@ -79,26 +79,26 @@ function fiveDayForcast() {
         cardRowEl.append(cardEl);
         //date
         var dateEl = document.createElement('div');
-        dateEl.textContent = moment.unix(data.list[0].dt).format("MM/DD/YYYY");
+        dateEl.textContent = moment.unix(data.list[i].dt).format("MM/DD/YYYY");
         dateEl.classList.add("custom-header");
         cardEl.append(dateEl);
         //emoji
         var imgEl = document.createElement('img');
-        var iconCode = data.list[0].weather[0].icon;
+        var iconCode = data.list[i].weather[0].icon;
         var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
         imgEl.setAttribute('src', iconUrl);
         cardEl.append(imgEl);
         //temp
         var temp = document.createElement('p');
-        temp.textContent = "Temp: " + data.list[0].main.temp + "\u00B0" + " F";
+        temp.textContent = "Temp: " + data.list[i].main.temp + "\u00B0" + " F";
         cardEl.append(temp);
         //wind
         var wind = document.createElement('p');
-        wind.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
+        wind.textContent = "Wind: " + data.list[i].wind.speed + " MPH";
         cardEl.append(wind);
         //humidity
         var humidity = document.createElement('p');
-        humidity.textContent = "Humidity: " + data.list[0].main.humidity + "%";
+        humidity.textContent = "Humidity: " + data.list[i].main.humidity + "%";
         cardEl.append(humidity);
         }
       });
