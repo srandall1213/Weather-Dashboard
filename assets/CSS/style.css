@@ -33,8 +33,53 @@ h3 {
 .custom-today {
    border: 1px solid black;
    line-height: 1;
-   padding-top: 10px;
+   padding: 10px;
    margin-top: 5px;
+}
+
+.uvindexLow {
+    background-color: green;
+    color: white;
+    text-align: center;
+    width: 60px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.uvindexModerate {
+    background-color: yellow;
+    color: black;
+    text-align: center;
+    width: 60px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.uvindexHigh {
+    background-color: orange;
+    color: black;
+    text-align: center;
+    width: 60px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.uvindexVeryHigh {
+    background-color: red;
+    color: white;
+    text-align: center;
+    width: 60px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.uvindexExtreme {
+    background-color: purple;
+    color: white;
+    text-align: center;
+    width: 60px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .custom-card {
