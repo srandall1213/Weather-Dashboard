@@ -6,7 +6,7 @@ searchBtn.addEventListener('click', getWeather);
 
 function getWeather() {
     //GEO LOCATION API TO GET LAT & LON FOR ONE CALL
-    var cityLatLonURL ='http://api.openweathermap.org/geo/1.0/direct?q=' + cityInput.value + '&limit=1&appid=' + apiKey;
+    var cityLatLonURL ='https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput.value + '&limit=1&appid=' + apiKey;
     fetch(cityLatLonURL)
       .then(function (response) {
         return response.json();
@@ -39,7 +39,7 @@ function getWeather() {
         //CURRENT WEATHER EMOJI
         var imgEl = document.createElement('img');
         var iconCode = data.current.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
         imgEl.setAttribute('src', iconUrl);
         cityName.append(imgEl);
         //CURRENT TEMPERATURE
@@ -91,7 +91,7 @@ function getWeather() {
         //emoji
         var imgEl = document.createElement('img');
         var iconCode = data.daily[i].weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
         imgEl.setAttribute('src', iconUrl);
         cardEl.append(imgEl);
         //temp
