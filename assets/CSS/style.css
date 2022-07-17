@@ -37,29 +37,26 @@ h3 {
    margin-top: 5px;
 }
 
-.uvindexFavorable {
+.favorable {
     background-color: green;
     color: white;
-    text-align: center;
-    width: 60px;
+    width: 110px;
     padding: 10px;
     border-radius: 5px;
 }
 
-.uvindexModerate {
+.moderate {
     background-color: yellow;
     color: black;
-    text-align: center;
-    width: 60px;
+    width: 110px;
     padding: 10px;
     border-radius: 5px;
 }
 
-.uvindexSevere {
+.severe {
     background-color: red;
     color: black;
-    text-align: center;
-    width: 60px;
+    width: 110px;
     padding: 10px;
     border-radius: 5px;
 }

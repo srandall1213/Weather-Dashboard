@@ -54,19 +54,27 @@ function getWeather() {
         var humidityToday = document.createElement('p');
         humidityToday.textContent = "Humidity: " + data.current.humidity + "%";
         todayContainerEl.append(humidityToday);
-        //CURRENT UV INDEX - FIX THIS SECTION!!!
-        //FIGURE OUT HOW TO ADD CSS TO THE VALUE
-        //ADD IF STATMENTS TO DETERMINE COLOR (0-2 favorable, 3-5 moderate, 6+ severe)
-        var uvindexToday = document.createElement('p');
-        uvindexToday.textContent = "UV Index: " + data.current.uvi
-        todayContainerEl.append(uvindexToday);
+        //CURRENT UV INDEX 
+        var uvColorBox = document.createElement('p');
+        var uvColorBoxText = document.createTextNode(`UV Index: ${data.current.uvi}`);
+       
+        if (data.current.uvi <= 2) {
+          $(uvColorBox).addClass("favorable");
+        } else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
+          $(uvColorBox).addClass("moderate");
+        } else {
+          $(uvColorBox).addClass("severe");
+        }
 
+        uvColorBox.append(uvColorBoxText);
+        todayContainerEl.append(uvColorBox);
+      
         //5-DAY FORECAST TITLE
         var fiveDayTitleEl = document.querySelector("#fiveDayTitle");
         fiveDayTitleEl.textContent = "5-Day Forcast:";
-
-        //FOR LOOP FOR ALL 5 CARDS -- FIGURE OUT HOW TO ONLY SELECT THE FIRST 5 OF THE ARRAY IN DATA.DAILY.. NOT ALL 8. NEED HELP HERE!!!!
-        for (var i = 0; i < data.daily; i++) {
+        
+        //FOR LOOP FOR ALL 5 CARDS
+        for (var i = 0; i < 5; i++) {
 
         //CARDS
         // container + background
