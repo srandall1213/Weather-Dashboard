@@ -7,8 +7,10 @@
 [!Weather Dashboard]()
 
 ## Deployed Application Link: 
+https://srandall1213.github.io/Weather-Dashboard/
 
---take out current day from 5 day forecast cards
---make underline under search button appear only on click
---fix uv index box to have color only around the number
---convert objects in storage 
+## To Do:
+
+- take out current day from 5 day forecast cards
+- fix uv index box to have color only around the number
+- figure out storage & rendering

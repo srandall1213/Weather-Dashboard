@@ -6,7 +6,7 @@ var weatherBoxesEl = document.querySelector("#weatherBoxes");
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
   event.preventDefault();
-  
+
   if (cityInput.value === "") {
     alert("City cannot be blank.");
   } else {
@@ -108,7 +108,7 @@ function getWeather() {
         //FOR LOOP FOR ALL 5 CARDS
         for (var i = 0; i < 5; i++) {
 
-        //CARDS
+        //5-DAY FORECAST CARDS
         // container + background
         var cardRowEl = document.querySelector("#cardRow");
         var cardEl = document.createElement('div');
