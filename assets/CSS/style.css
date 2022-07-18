@@ -17,12 +17,16 @@ h3 {
     margin: 10px 0px;
 }
 
-#searchHistory {
-    border-top: 1px solid black;
+.custom-btn:hover {
+    cursor: pointer;
+}
+
+#searchDivider {
+    border-top: 1px solid black; 
 }
 
 .searchItem {
-    list-style-type: none;
+    border-style: none;
     border-radius: 4px;
     background-color: rgb(178, 175, 175);
     text-align: center;
@@ -40,24 +44,27 @@ h3 {
 .favorable {
     background-color: green;
     color: white;
-    width: 110px;
-    padding: 10px;
+    width: 130px;
+    text-align: center;
+    padding: 6px;
     border-radius: 5px;
 }
 
 .moderate {
     background-color: yellow;
     color: black;
-    width: 110px;
-    padding: 10px;
+    width: 130px;
+    text-align: center;
+    padding: 6px;
     border-radius: 5px;
 }
 
 .severe {
     background-color: red;
     color: black;
-    width: 110px;
-    padding: 10px;
+    width: 130px;
+    text-align: center;
+    padding: 6px;
     border-radius: 5px;
 }
 

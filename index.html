@@ -18,34 +18,26 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
-
+    <!-- Page Title -->
     <div class="jumbotron jumbotron-fluid custom-jumbotron"><h1 class="display-5">Weather Dashboard</h1></div>
-    
     <section class="container-fluid mb-5">
-        <!-- all content in a row -->
         <div class="row">
-
             <!-- Column 1: Search for a City-->
-            <div class="col-12 col-md-4 col-xl-3 card border-0">
+            <div class="col-12 col-md-4 col-xl-3 border-0 card" id="searchBox">
                 <h3>Search for a City:</h3>
                 <input type="text" class="form-control" placeholder="San Diego" aria-label="City Search Box" id="cityInput">
                 <a class="btn custom-btn w-100" id="searchBtn">Search</a>
-                <div id="searchHistory">
-                    <div class="searchItem">demo</div>
-                    
-                </div>
+                <div id="searchDivider"></div>
             </div>
-        
-            <!-- Column 2 -->
-            <div class="col-12 col-md-8 col-xl-9">
-                <!-- Today Box -->
+            
+            <!-- Column 2: Current & 5 Day Forecast-->
+            <div class="col-12 col-md-8 col-xl-9" id = "weatherBoxes">
+                <!-- Current Box -->
                 <div class="col" id="todayContainer"></div>
-                <div id="uvColorBox"></div>
-                <!-- 5-Day Forcast Title -->
+                <!-- 5-Day Forecast Title -->
                 <h3 class="container-fluid p-1 mt-2" id="fiveDayTitle"></h3>
-                <!-- Forcast cards in a row -->
-                <div class="row justify-content-center w-auto" id="cardRow">
-            </div>
+                <!-- Forecast Cards -->
+                <div class="row justify-content-center w-auto" id="cardRow"></div>
             </div>
         </div>
     </section>
