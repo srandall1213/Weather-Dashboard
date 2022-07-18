@@ -113,7 +113,7 @@ function getWeather() {
         var cardRowEl = document.querySelector("#cardRow");
         var cardEl = document.createElement('div');
         cardEl.classList.add("custom-card");
-        cardEl.classList.add("col-2");
+        cardEl.classList.add("col");
         cardRowEl.append(cardEl);
         //date
         var dateEl = document.createElement('div');
