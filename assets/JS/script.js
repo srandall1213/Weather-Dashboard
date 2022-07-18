@@ -6,12 +6,20 @@ var weatherBoxesEl = document.querySelector("#weatherBoxes");
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
   event.preventDefault();
+  
   if (cityInput.value === "") {
     alert("City cannot be blank.");
   } else {
-    // weatherBoxesEl.innerHTML = "";
+    document.querySelector("#cardRow").innerHTML = '';
+    document.querySelector('#todayContainer').innerHTML = '';
   }
+
+  var dividerLine = document.createElement("div");
+  dividerLine.className = "searchDivider";
+  $("#searchBox").append(dividerLine);
+
   getWeather();
+
 });
 
 function getWeather() {
@@ -96,7 +104,7 @@ function getWeather() {
         //5-DAY FORECAST TITLE
         var fiveDayTitleEl = document.querySelector("#fiveDayTitle");
         fiveDayTitleEl.innerHTML = "5-Day Forecast:";
-        
+
         //FOR LOOP FOR ALL 5 CARDS
         for (var i = 0; i < 5; i++) {
 

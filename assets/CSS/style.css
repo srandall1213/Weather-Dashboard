@@ -21,7 +21,7 @@ h3 {
     cursor: pointer;
 }
 
-#searchDivider {
+.searchDivider {
     border-top: 1px solid black; 
 }
 
