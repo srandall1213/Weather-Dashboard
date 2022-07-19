@@ -2,8 +2,6 @@ var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 
-
-
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
   event.preventDefault();
@@ -42,7 +40,6 @@ var oldCityClickHandler = function (event) {
     document.querySelector("#cardRow").innerHTML = '';
     document.querySelector('#todayContainer').innerHTML = '';
   }
-  cityInput.innerHTML = searchedCity;
 
   console.log(JSON.parse(localStorage.getItem('Cities:'))) //need to get specific city that matches the button
 
