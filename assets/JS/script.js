@@ -2,6 +2,8 @@ var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 
+
+
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
   event.preventDefault();
@@ -17,19 +19,37 @@ searchBtn.addEventListener('click', function(event) {
 
 });
 
-// SET CITIES TO STORAGE FUNCTION
+// SET CITIES TO STORAGE
 function save() {
-  var new_data = document.querySelector('#cityInput').value;
+  var new_city = document.querySelector('#cityInput').value;
 
-  if(localStorage.getItem('City:') == null) {
-    localStorage.setItem('City:', '[]');
+  if(localStorage.getItem('Cities:') == null) {
+    localStorage.setItem('Cities:', '[]');
   }
 
-  var old_data = JSON.parse(localStorage.getItem('City:'));
-  old_data.push(new_data);
+  var old_city = JSON.parse(localStorage.getItem('Cities:'));
+  old_city.push(new_city);
 
-  localStorage.setItem('City:', JSON.stringify(old_data));
+  localStorage.setItem('Cities:', JSON.stringify(old_city));
 }
+
+//TRYING TO FIGURE OUT HOW TO RENDER CITY FROM SEARCH HISTORY.. BELOW IS AN EXAMPLE FROM CLASS THAT I'M TRYING TO APPLY
+var oldCityClickHandler = function (event) {
+  var searchedCity = event.target.getAttribute('data-search');
+
+  if (searchedCity) {
+    getWeather(searchedCity);
+    document.querySelector("#cardRow").innerHTML = '';
+    document.querySelector('#todayContainer').innerHTML = '';
+  }
+  cityInput.innerHTML = searchedCity;
+
+  console.log(JSON.parse(localStorage.getItem('Cities:'))) //need to get specific city that matches the button
+
+};
+
+// CLICK CITY NAME IN SEARCH HISTORY TO RENDER THAT CITY
+searchItemBtn.addEventListener('click', oldCityClickHandler);
 
 function getWeather() {
     //GEO LOCATION API TO GET LATITUDE & LONGITUDE FOR "ONE CALL"
@@ -48,35 +68,22 @@ function getWeather() {
 
         //CURRENT DAY BOX - CITY NAME
         var cityName = document.createElement('h3');
-        var cityData = data[0].name
+        var cityData = data[0].name;
         cityName.innerHTML = cityData;
         todayContainerEl.append(cityName);
-        
+
         //SEARCH HISTORY DIVIDER LINE
-        var dividerLine = document.createElement("div");
-        dividerLine.className = "searchDivider";
-        $("#searchBox").append(dividerLine);
-        
-        //SEARCH HISTORY - CITY NAME BUTTON 
+        var dividerEl = document.querySelector("#divider");
+        dividerEl.className = "searchDivider";
+
+        //SEARCH HISTORY
+        var searchHistoryContainer = document.querySelector("#searchHistory")
         var searchItemBtn = document.createElement('button');
-        searchItemBtn.classList.add("searchItem");
+        searchItemBtn.classList.add("searchItemBtn");
+        searchItemBtn.setAttribute('data-search', cityData);
         searchItemBtn.innerHTML = cityData;
-        $("#searchBox").append(searchItemBtn);
+        searchHistoryContainer.append(searchItemBtn);  
 
-        // CLICK CITY NAME IN SEARCH HISTORY TO RENDER THAT CITY
-        searchItemBtn.addEventListener('click', function(event) {
-          event.preventDefault();
-
-          //RETRIEVE STORED DATA ----------------> WORKING ON THIS CODE!!! <----------------
-          if(localStorage.getItem("City:") != null){
-            document.querySelector("#cardRow").innerHTML = '';
-            document.querySelector('#todayContainer').innerHTML = '';
-            cityInput.innerHTML = JSON.parse(localStorage.getItem('City:'));
-            console.log(JSON.parse(localStorage.getItem('City:'))) //need to pull specific city that matches the button & stop appending searches
-            getWeather();
-          }
-          
-        });
 
         //"ONE CALL" FOR CURRENT & 5-DAY FORECAST
         var weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + '&units=imperial';
@@ -177,7 +184,6 @@ function getWeather() {
           cardEl.append(humidity);
           }
 
-          
         });
       }); 
 }
