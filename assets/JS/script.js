@@ -2,7 +2,6 @@ var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 
-
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
   event.preventDefault();
@@ -12,15 +11,25 @@ searchBtn.addEventListener('click', function(event) {
   } else {
     document.querySelector("#cardRow").innerHTML = '';
     document.querySelector('#todayContainer').innerHTML = '';
+    getWeather();
+    save();
   }
 
-  var dividerLine = document.createElement("div");
-  dividerLine.className = "searchDivider";
-  $("#searchBox").append(dividerLine);
-
-  getWeather();
-
 });
+
+// SET CITIES TO STORAGE FUNCTION
+function save() {
+  var new_data = document.querySelector('#cityInput').value;
+
+  if(localStorage.getItem('City:') == null) {
+    localStorage.setItem('City:', '[]');
+  }
+
+  var old_data = JSON.parse(localStorage.getItem('City:'));
+  old_data.push(new_data);
+
+  localStorage.setItem('City:', JSON.stringify(old_data));
+}
 
 function getWeather() {
     //GEO LOCATION API TO GET LATITUDE & LONGITUDE FOR "ONE CALL"
@@ -43,21 +52,29 @@ function getWeather() {
         cityName.innerHTML = cityData;
         todayContainerEl.append(cityName);
         
+        //SEARCH HISTORY DIVIDER LINE
+        var dividerLine = document.createElement("div");
+        dividerLine.className = "searchDivider";
+        $("#searchBox").append(dividerLine);
+        
         //SEARCH HISTORY - CITY NAME BUTTON 
         var searchItemBtn = document.createElement('button');
         searchItemBtn.classList.add("searchItem");
         searchItemBtn.innerHTML = cityData;
         $("#searchBox").append(searchItemBtn);
 
-        // CLICK CITY NAME IN SEARCH HISTORY TO RENDER THAT CITY - work on this after you set the items correctly
+        // CLICK CITY NAME IN SEARCH HISTORY TO RENDER THAT CITY
         searchItemBtn.addEventListener('click', function(event) {
           event.preventDefault();
 
-          var retrievedCurrent = localStorage.getItem('Current Storage:');
-          console.log('Retrieved Current Storage:', JSON.parse(retrievedCurrent));
-
-          var retrievedForecast = localStorage.getItem('Forecast Storage:');
-          console.log('Retrieved Forecast Storage:', JSON.parse(retrievedForecast));
+          //RETRIEVE STORED DATA ----------------> WORKING ON THIS CODE!!! <----------------
+          if(localStorage.getItem("City:") != null){
+            document.querySelector("#cardRow").innerHTML = '';
+            document.querySelector('#todayContainer').innerHTML = '';
+            cityInput.innerHTML = JSON.parse(localStorage.getItem('City:'));
+            console.log(JSON.parse(localStorage.getItem('City:'))) //need to pull specific city that matches the button & stop appending searches
+            getWeather();
+          }
           
         });
 
@@ -68,6 +85,7 @@ function getWeather() {
             return response.json();
           })
           .then(function (data) {
+            console.log(data)
 
           //CURRENT DATE
           var todayDate = document.createElement('h3');
@@ -159,28 +177,7 @@ function getWeather() {
           cardEl.append(humidity);
           }
 
-          // SET CURRENT DATA TO STORAGE
-          var currentStorage = {
-            'City': cityData,
-            'Current Date': currentDate,
-            'Current Icon': iconCode,
-            'Current Temp': currentTemp,
-            'Current Wind': currentWind,
-            'Current Humidity': currentHumidity,
-            'Current UV Index': currentUVI,
-          }
-          localStorage.setItem('Current Storage:', JSON.stringify(currentStorage));
-
-          //SET FORECAST DATA TO STORAGE
-          var forecastStorage = {
-            'Forecast Date': dateData,
-            'Forecast Icon': iconCode5,
-            'Forecast Temp': tempData,
-            'Forecast Wind': windData,
-            'Forecast Humidity': humidityData,
-          }
-          localStorage.setItem('Forecast Storage:', JSON.stringify(forecastStorage));
-
+          
         });
       }); 
 }
