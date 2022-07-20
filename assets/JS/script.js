@@ -14,42 +14,52 @@ searchBtn.addEventListener('click', function(event) {
     getWeather();
     save();
   }
-
 });
 
-// SET CITIES TO STORAGE
+// SAVE FUNCTION
 function save() {
   var new_city = document.querySelector('#cityInput').value;
-
+  
   if(localStorage.getItem('Cities:') == null) {
     localStorage.setItem('Cities:', '[]');
   }
 
   var old_city = JSON.parse(localStorage.getItem('Cities:'));
   old_city.push(new_city);
-
+  console.log(new_city);
+  
   localStorage.setItem('Cities:', JSON.stringify(old_city));
+
+  //Divider Line CSS
+  var dividerEl = document.querySelector("#divider");
+  dividerEl.className = "searchDivider";
+
+  //Search History Buttons
+  for (var i = 0; i < old_city.length; i++) {
+    var searchHistoryContainer = document.querySelector("#searchHistory")
+    var searchItemBtn = document.createElement('button');
+    searchItemBtn.classList.add("searchItemBtn");
+    searchedCity = JSON.parse(localStorage.getItem('Cities:'))[i];
+    searchItemBtn.innerHTML += searchedCity;
+    searchHistoryContainer.append(searchItemBtn);  
+  }
 }
 
-//TRYING TO FIGURE OUT HOW TO RENDER CITY FROM SEARCH HISTORY.. BELOW IS AN EXAMPLE FROM CLASS THAT I'M TRYING TO APPLY
-var oldCityClickHandler = function (event) {
-  var searchedCity = event.target.getAttribute('data-search');
-
-  if (searchedCity) {
-    getWeather(searchedCity);
-    document.querySelector("#cardRow").innerHTML = '';
-    document.querySelector('#todayContainer').innerHTML = '';
-  }
-
-  console.log(JSON.parse(localStorage.getItem('Cities:'))) //need to get specific city that matches the button
-
-};
-
 // CLICK CITY NAME IN SEARCH HISTORY TO RENDER THAT CITY
-searchItemBtn.addEventListener('click', oldCityClickHandler);
+// searchItemBtn.addEventListener('click', function (event) {
+//   event.preventDefault();
+//   document.querySelector("#cardRow").innerHTML = '';
+//   document.querySelector('#todayContainer').innerHTML = '';
+//   getWeather(event.target.id);
 
+//   console.log("Retrieved Storage", JSON.parse(localStorage.getItem('Cities:'))) //need to get specific city that matches the button
+  
+// });
+
+
+//GET WEATHER FUNCTION
 function getWeather() {
-    //GEO LOCATION API TO GET LATITUDE & LONGITUDE FOR "ONE CALL"
+    //Geo location to get latitude and longitude for "One Call"
     var cityLatLonURL ='https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput.value + '&limit=1&appid=' + apiKey;
     fetch(cityLatLonURL)
       .then(function (response) {
@@ -59,28 +69,15 @@ function getWeather() {
         var lat = data[0].lat;
         var lon = data[0].lon;
         
-        //CURRENT DAY BORDER BOX
+        //Border Box CSS
         var todayContainerEl = document.querySelector('#todayContainer')
         todayContainerEl.className = "custom-today";
 
-        //CURRENT DAY BOX - CITY NAME
+        //Display City Name
         var cityName = document.createElement('h3');
         var cityData = data[0].name;
         cityName.innerHTML = cityData;
         todayContainerEl.append(cityName);
-
-        //SEARCH HISTORY DIVIDER LINE
-        var dividerEl = document.querySelector("#divider");
-        dividerEl.className = "searchDivider";
-
-        //SEARCH HISTORY
-        var searchHistoryContainer = document.querySelector("#searchHistory")
-        var searchItemBtn = document.createElement('button');
-        searchItemBtn.classList.add("searchItemBtn");
-        searchItemBtn.setAttribute('data-search', cityData);
-        searchItemBtn.innerHTML = cityData;
-        searchHistoryContainer.append(searchItemBtn);  
-
 
         //"ONE CALL" FOR CURRENT & 5-DAY FORECAST
         var weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + '&units=imperial';
@@ -91,38 +88,38 @@ function getWeather() {
           .then(function (data) {
             console.log(data)
 
-          //CURRENT DATE
+          //Current Date
           var todayDate = document.createElement('h3');
           var currentDate = moment.unix(data.current.dt).format(" (MM/DD/YYYY) ");
           todayDate = currentDate;
           cityName.append(todayDate);
         
-          //CURRENT WEATHER ICON
+          //Current Weather Icon
           var imgEl = document.createElement('img');
           var iconCode = data.current.weather[0].icon;
           var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
           imgEl.setAttribute('src', iconUrl);
           cityName.append(imgEl);
        
-          //CURRENT TEMPERATURE
+          //Current Temperature
           var tempToday = document.createElement('p');
           var currentTemp = data.current.temp;
           tempToday.innerHTML = "Temperature: " + currentTemp + "\u00B0" + " F";
           todayContainerEl.append(tempToday);
     
-          //CURRENT WIND SPEED
+          //Current Wind Speed 
           var windToday = document.createElement('p');
           var currentWind = data.current.wind_speed;
           windToday.innerHTML = "Wind: " + currentWind + " MPH";
           todayContainerEl.append(windToday);
 
-          //CURRENT HUMIDITY 
+          //Current Humidity
           var humidityToday = document.createElement('p');
           var currentHumidity = data.current.humidity;
           humidityToday.innerHTML = "Humidity: " + currentHumidity + "%";
           todayContainerEl.append(humidityToday);
 
-          //CURRENT UV INDEX 
+          //Current UV Index
           var uvColorBox = document.createElement('p');
           var currentUVI = data.current.uvi;
           var uvColorBoxText = document.createTextNode(`UV Index: ${currentUVI}`);
@@ -138,14 +135,14 @@ function getWeather() {
           uvColorBox.append(uvColorBoxText);
           todayContainerEl.append(uvColorBox);
       
-          //5-DAY FORECAST TITLE
+          //5-DAY Forcast Title 
           var fiveDayTitleEl = document.querySelector("#fiveDayTitle");
           fiveDayTitleEl.innerHTML = "5-Day Forecast:";
 
           //FOR LOOP FOR ALL 5 CARDS
           for (var i = 0; i < 5; i++) {
 
-          //5-DAY FORECAST CARDS
+          //5-DAY Forcast Cards
           // container + background
           var cardRowEl = document.querySelector("#cardRow");
           var cardEl = document.createElement('div');
