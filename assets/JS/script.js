@@ -19,6 +19,8 @@ searchBtn.addEventListener('click', function(event) {
   }
 });
 
+keepButtons();
+
 // SAVE FUNCTION
 function save() {
   var new_city = document.querySelector('#cityInput').value;
@@ -39,16 +41,20 @@ function save() {
 //SEARCH HISTORY BUTTONS
 //Creates buttons from storage
 function getButtons() {
-  var old_city = JSON.parse(localStorage.getItem('Cities:'));
-  searchHistoryEl.innerHTML = "";
-  for (var i = 0; i < old_city.length; i++) {
-    var searchItemBtn = document.createElement('button');
-    searchItemBtn.classList.add("searchItemBtn");
-    var searchedCity = JSON.parse(localStorage.getItem('Cities:'))[i];
-    searchItemBtn.innerHTML += searchedCity;
-    searchHistoryEl.append(searchItemBtn); 
-    renderWeather();
-  }
+  
+  if(localStorage.getItem('Cities:') != null) {
+    var old_city = JSON.parse(localStorage.getItem('Cities:'));
+    searchHistoryEl.innerHTML = "";
+
+    for (var i = 0; i < old_city.length; i++) {
+      var searchItemBtn = document.createElement('button');
+      searchItemBtn.classList.add("searchItemBtn");
+      var searchedCity = JSON.parse(localStorage.getItem('Cities:'))[i];
+      searchItemBtn.innerHTML += searchedCity;
+      searchHistoryEl.append(searchItemBtn); 
+      renderWeather();
+    }
+  } 
 
   //Render city's forecast on click
   function renderWeather() {
@@ -71,7 +77,7 @@ function keepButtons () {
     getButtons();
   }
 }
-keepButtons();
+
 
 //GET WEATHER FUNCTION
 function getWeather(city) {
@@ -102,7 +108,6 @@ function getWeather(city) {
             return response.json();
           })
           .then(function (data) {
-            console.log(data)
 
           //Current Date
           var todayDate = document.createElement('h3');
