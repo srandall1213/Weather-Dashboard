@@ -2,7 +2,7 @@ var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 var searchHistoryEl = document.querySelector("#searchHistory");
-
+var searchButtons = document.getElementsByClassName('searchItemBtn');
 
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
@@ -37,29 +37,31 @@ function save() {
 }
 
 //SEARCH HISTORY BUTTONS
+//Creates buttons from storage
 function getButtons() {
   var old_city = JSON.parse(localStorage.getItem('Cities:'));
   searchHistoryEl.innerHTML = "";
   for (var i = 0; i < old_city.length; i++) {
-    var searchHistoryContainer = document.querySelector("#searchHistory")
     var searchItemBtn = document.createElement('button');
     searchItemBtn.classList.add("searchItemBtn");
     var searchedCity = JSON.parse(localStorage.getItem('Cities:'))[i];
     searchItemBtn.innerHTML += searchedCity;
-    searchHistoryContainer.append(searchItemBtn); 
+    searchHistoryEl.append(searchItemBtn); 
+    renderWeather();
   }
 
-  searchItemBtn.addEventListener("click", function(event) { //WHY IS THIS MAYBE ONLY WORKING FOR LAST BUTTON IN THE LIST?
-    event.preventDefault();
-    if (searchItemBtn.innerHTML += searchedCity) {
-      document.querySelector("#cardRow").innerHTML = '';
-      document.querySelector('#todayContainer').innerHTML = ''
-      searchedCity === cityInput.value;
-      getWeather();
-    }
-    })
+  //Render city's forecast on click
+  function renderWeather() {
+    searchItemBtn.addEventListener("click", function(event) { 
+      event.preventDefault();
+      if (searchItemBtn) {
+        document.querySelector("#cardRow").innerHTML = '';
+        document.querySelector('#todayContainer').innerHTML = ''
+        getWeather(event.target.id); //WHY IS THIS ONLY POPULATING THE LAST CITY SEARCHED INSTEAD OF THE CITY NAME ON THE BUTTON?
+      }
+    });
+  }
 }
-
 
 //GET WEATHER FUNCTION
 function getWeather() {
