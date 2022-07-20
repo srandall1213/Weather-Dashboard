@@ -1,6 +1,8 @@
 var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
+var searchHistoryEl = document.querySelector("#searchHistory");
+
 
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
@@ -13,6 +15,7 @@ searchBtn.addEventListener('click', function(event) {
     document.querySelector('#todayContainer').innerHTML = '';
     getWeather();
     save();
+    getButtons();
   }
 });
 
@@ -23,38 +26,39 @@ function save() {
   if(localStorage.getItem('Cities:') == null) {
     localStorage.setItem('Cities:', '[]');
   }
-
   var old_city = JSON.parse(localStorage.getItem('Cities:'));
   old_city.push(new_city);
-  console.log(new_city);
   
   localStorage.setItem('Cities:', JSON.stringify(old_city));
 
   //Divider Line CSS
   var dividerEl = document.querySelector("#divider");
   dividerEl.className = "searchDivider";
+}
 
-  //Search History Buttons
+//SEARCH HISTORY BUTTONS
+function getButtons() {
+  var old_city = JSON.parse(localStorage.getItem('Cities:'));
+  searchHistoryEl.innerHTML = "";
   for (var i = 0; i < old_city.length; i++) {
     var searchHistoryContainer = document.querySelector("#searchHistory")
     var searchItemBtn = document.createElement('button');
     searchItemBtn.classList.add("searchItemBtn");
-    searchedCity = JSON.parse(localStorage.getItem('Cities:'))[i];
+    var searchedCity = JSON.parse(localStorage.getItem('Cities:'))[i];
     searchItemBtn.innerHTML += searchedCity;
-    searchHistoryContainer.append(searchItemBtn);  
+    searchHistoryContainer.append(searchItemBtn); 
   }
+
+  searchItemBtn.addEventListener("click", function(event) { //WHY IS THIS MAYBE ONLY WORKING FOR LAST BUTTON IN THE LIST?
+    event.preventDefault();
+    if (searchItemBtn.innerHTML += searchedCity) {
+      document.querySelector("#cardRow").innerHTML = '';
+      document.querySelector('#todayContainer').innerHTML = ''
+      searchedCity === cityInput.value;
+      getWeather();
+    }
+    })
 }
-
-// CLICK CITY NAME IN SEARCH HISTORY TO RENDER THAT CITY
-// searchItemBtn.addEventListener('click', function (event) {
-//   event.preventDefault();
-//   document.querySelector("#cardRow").innerHTML = '';
-//   document.querySelector('#todayContainer').innerHTML = '';
-//   getWeather(event.target.id);
-
-//   console.log("Retrieved Storage", JSON.parse(localStorage.getItem('Cities:'))) //need to get specific city that matches the button
-  
-// });
 
 
 //GET WEATHER FUNCTION
@@ -181,6 +185,10 @@ function getWeather() {
         });
       }); 
 }
+
+
+
+
 
 
         
