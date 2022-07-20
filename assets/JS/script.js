@@ -57,7 +57,7 @@ function getButtons() {
       if (searchItemBtn) {
         document.querySelector("#cardRow").innerHTML = '';
         document.querySelector('#todayContainer').innerHTML = ''
-        getWeather(event.target); //WHY IS THIS ONLY POPULATING THE LAST CITY SEARCHED INSTEAD OF THE CITY NAME ON THE BUTTON?
+        getWeather(event.target.innerHTML);
       }
     });
   }
