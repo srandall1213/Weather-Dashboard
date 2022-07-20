@@ -4,6 +4,7 @@ var searchBtn = document.querySelector('#searchBtn');
 var searchHistoryEl = document.querySelector("#searchHistory");
 var searchButtons = document.getElementsByClassName('searchItemBtn');
 
+
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
 searchBtn.addEventListener('click', function(event) {
   event.preventDefault();
@@ -62,6 +63,16 @@ function getButtons() {
     });
   }
 }
+
+//KEEP BUTTONS ON RELOAD
+function keepButtons () {
+  if (localStorage === "") {
+
+  } else {
+    getButtons();
+  }
+}
+keepButtons();
 
 //GET WEATHER FUNCTION
 function getWeather(city) {

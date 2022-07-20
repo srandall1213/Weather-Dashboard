@@ -12,5 +12,4 @@ https://srandall1213.github.io/Weather-Dashboard/
 ## To Do:
 
 - fix uv index box to have color only around the number
-- fix rendering
 - keep buttons there on reload
