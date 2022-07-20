@@ -37,35 +37,38 @@ h3 {
 .custom-today {
    border: 1px solid black;
    line-height: 1;
-   padding: 8px;
+   padding: 8px 0px 0px 8px;
    margin-top: 5px;
 }
 
 .favorable {
     background-color: green;
     color: white;
-    width: 130px;
+    width: 50px;
     text-align: center;
     padding: 6px;
     border-radius: 5px;
+    display: inline-block;
 }
 
 .moderate {
     background-color: yellow;
     color: black;
-    width: 130px;
+    width: 50px;
     text-align: center;
     padding: 6px;
     border-radius: 5px;
+    display: inline-block;
 }
 
 .severe {
     background-color: red;
     color: black;
-    width: 130px;
+    width: 50px;
     text-align: center;
     padding: 6px;
     border-radius: 5px;
+    display: inline-block;
 }
 
 .custom-card {

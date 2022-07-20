@@ -2,7 +2,6 @@ var apiKey = '044bb9c5369619c2020f969f5078b5a5';
 var cityInput = document.querySelector('#cityInput');
 var searchBtn = document.querySelector('#searchBtn');
 var searchHistoryEl = document.querySelector("#searchHistory");
-var searchButtons = document.getElementsByClassName('searchItemBtn');
 
 
 //CLICK SEARCH TO GET WEATHER & CLEAR PREVIOUS INFO FROM SCREEN
@@ -137,21 +136,24 @@ function getWeather(city) {
           todayContainerEl.append(humidityToday);
 
           //Current UV Index
-          var uvColorBox = document.createElement('p');
-          var currentUVI = data.current.uvi;
-          var uvColorBoxText = document.createTextNode(`UV Index: ${currentUVI}`);
+          var uvIndexLabel = document.createElement('p');
+          todayContainerEl.append(uvIndexLabel);
+          uvIndexLabel.innerHTML = "UV Index:   " 
 
+          var uvIndexValue = document.createElement('p');
+          uvIndexLabel.append(uvIndexValue);
+
+          var currentUVI = data.current.uvi;
+          uvIndexValue.innerHTML = currentUVI;
+          
           if (currentUVI <= 2) {
-            $(uvColorBox).addClass("favorable");
+            $(uvIndexValue).addClass("favorable");
           } else if (currentUVI >= 3 && currentUVI <= 5) {
-            $(uvColorBox).addClass("moderate");
+            $(uvIndexValue).addClass("moderate");
           } else {
-            $(uvColorBox).addClass("severe");
+            $(uvIndexValue).addClass("severe");
           }
 
-          uvColorBox.append(uvColorBoxText);
-          todayContainerEl.append(uvColorBox);
-      
           //5-DAY Forcast Title 
           var fiveDayTitleEl = document.querySelector("#fiveDayTitle");
           fiveDayTitleEl.innerHTML = "5-Day Forecast:";
