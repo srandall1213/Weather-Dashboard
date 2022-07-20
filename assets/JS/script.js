@@ -13,7 +13,7 @@ searchBtn.addEventListener('click', function(event) {
   } else {
     document.querySelector("#cardRow").innerHTML = '';
     document.querySelector('#todayContainer').innerHTML = '';
-    getWeather();
+    getWeather(cityInput.value);
     save();
     getButtons();
   }
@@ -57,16 +57,16 @@ function getButtons() {
       if (searchItemBtn) {
         document.querySelector("#cardRow").innerHTML = '';
         document.querySelector('#todayContainer').innerHTML = ''
-        getWeather(event.target.id); //WHY IS THIS ONLY POPULATING THE LAST CITY SEARCHED INSTEAD OF THE CITY NAME ON THE BUTTON?
+        getWeather(event.target); //WHY IS THIS ONLY POPULATING THE LAST CITY SEARCHED INSTEAD OF THE CITY NAME ON THE BUTTON?
       }
     });
   }
 }
 
 //GET WEATHER FUNCTION
-function getWeather() {
+function getWeather(city) {
     //Geo location to get latitude and longitude for "One Call"
-    var cityLatLonURL ='https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput.value + '&limit=1&appid=' + apiKey;
+    var cityLatLonURL ='https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
     fetch(cityLatLonURL)
       .then(function (response) {
         return response.json();
